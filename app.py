@@ -1,27 +1,28 @@
 import streamlit as st
 import numpy as np
-import joblib
-import requests
-import io
-import os
+import pickle
+import gdown
 
-# Step 1: Download and load model directly from Google Drive
-model_url = 'https://drive.google.com/uc?export=download&id=1145pyLGPoikAtEn6sK0kRN8TaOvolyYy'
-
+# Step 1: Load model from Google Drive safely using gdown
 @st.cache_resource
 def load_model():
-    response = requests.get(model_url)
-    response.raise_for_status()
-    model = joblib.load(io.BytesIO(response.content))
+    file_id = "1145pyLGPoikAtEn6sK0kRN8TaOvolyYy"  # your Google Drive model ID
+    url = f"https://drive.google.com/uc?id={file_id}"
+    output = "heart_model.pkl"
+    gdown.download(url, output, quiet=False)
+
+    with open(output, "rb") as f:
+        model = pickle.load(f)
     return model
 
+# Load model
 model = load_model()
 
-# Step 2: Load scaler
+# Step 2: Load the scaler from local file
 with open('scaler.pkl', 'rb') as f:
-    scaler = joblib.load(f)
+    scaler = pickle.load(f)
 
-# Step 3: Streamlit app
+# Step 3: Streamlit UI
 st.title("❤️ Heart Disease Prediction App")
 
 # Step 4: Collect user input
@@ -46,7 +47,7 @@ features = np.array([[HighBP, HighChol, BMI, Smoker, Diabetes, PhysActivity,
                       Fruits, Veggies, HvyAlcoholConsump, MentHlth, PhysHlth,
                       Sex, Age, Education, Income]])
 
-# Step 6: Predict
+# Step 6: Scale features and predict
 features_scaled = scaler.transform(features)
 prediction = model.predict(features_scaled)
 
