@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import pickle
+import joblib
 import requests
 import io
 import os
@@ -12,14 +12,14 @@ model_url = 'https://drive.google.com/uc?export=download&id=1145pyLGPoikAtEn6sK0
 def load_model():
     response = requests.get(model_url)
     response.raise_for_status()
-    model = pickle.load(io.BytesIO(response.content))
+    model = joblib.load(io.BytesIO(response.content))
     return model
 
 model = load_model()
 
-# Step 2: Load scaler (from local file or remote if needed)
+# Step 2: Load scaler
 with open('scaler.pkl', 'rb') as f:
-    scaler = pickle.load(f)
+    scaler = joblib.load(f)
 
 # Step 3: Streamlit app
 st.title("❤️ Heart Disease Prediction App")
