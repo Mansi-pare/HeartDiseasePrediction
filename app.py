@@ -1,27 +1,30 @@
 import streamlit as st
 import numpy as np
 import pickle
-import gdown
+import requests
+import io
 import os
 
-# Step 1: Download model file from Google Drive
-model_url = 'https://drive.google.com/uc?id=1145pyLGPoikAtEn6sK0kRN8TaOvolyYy'  # Replace with your link
-model_path = 'heart_model.pkl'
+# Step 1: Download and load model directly from Google Drive
+model_url = 'https://drive.google.com/uc?export=download&id=1145pyLGPoikAtEn6sK0kRN8TaOvolyYy'
 
-if not os.path.exists(model_path):
-    gdown.download(model_url, model_path, quiet=False)
+@st.cache_resource
+def load_model():
+    response = requests.get(model_url)
+    response.raise_for_status()
+    model = pickle.load(io.BytesIO(response.content))
+    return model
 
-# Step 2: Load model and scaler
-with open(model_path, 'rb') as f:
-    model = pickle.load(f)
+model = load_model()
 
+# Step 2: Load scaler (from local file or remote if needed)
 with open('scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 # Step 3: Streamlit app
 st.title("❤️ Heart Disease Prediction App")
 
-# Step 4: Collect user input in SAME order
+# Step 4: Collect user input
 HighBP = st.selectbox('Do you have High Blood Pressure?', [0, 1])
 HighChol = st.selectbox('Do you have High Cholesterol?', [0, 1])
 BMI = st.number_input('Enter BMI value', min_value=10.0, max_value=60.0, step=0.1)
@@ -38,12 +41,12 @@ Age = st.number_input('Age (in years)', min_value=18, max_value=100, step=1)
 Education = st.slider('Education Level (1–6)', 1, 6)
 Income = st.slider('Income Level (1–8)', 1, 8)
 
-# Step 5: Arrange inputs in same order as training
+# Step 5: Prepare data
 features = np.array([[HighBP, HighChol, BMI, Smoker, Diabetes, PhysActivity,
                       Fruits, Veggies, HvyAlcoholConsump, MentHlth, PhysHlth,
                       Sex, Age, Education, Income]])
 
-# Step 6: Scale and Predict
+# Step 6: Predict
 features_scaled = scaler.transform(features)
 prediction = model.predict(features_scaled)
 
