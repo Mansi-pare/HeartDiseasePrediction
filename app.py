@@ -5,7 +5,7 @@ import gdown
 import os
 
 # Step 1: Download model file from Google Drive
-model_url = 'https://drive.google.com/uc?id=12PhO6lWSpPNNlQeD3eqzuu8w6ZFpGL1w'  # Replace with your link
+model_url = 'https://drive.google.com/uc?id=1145pyLGPoikAtEn6sK0kRN8TaOvolyYy'  # Replace with your link
 model_path = 'heart_model.pkl'
 
 if not os.path.exists(model_path):
