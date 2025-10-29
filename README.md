@@ -1,3 +1,7 @@
+
+### 🌐 Live App: [Click here to open on Streamlit](https://heartdiseaseprediction-xktqqkfio7vwdmat6nyvc9.streamlit.app)
+
+
 # ❤️ Heart Disease Prediction using Machine Learning
 
 This project predicts the likelihood of heart disease based on various health indicators using **Machine Learning**.  
