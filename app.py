@@ -44,12 +44,14 @@ features = np.array([[HighBP, HighChol, BMI, Smoker, Diabetes, PhysActivity,
                       Sex, Age, Education, Income]])
 
 # Step 6: Scale and Predict
-features_scaled = scaler.transform(features)
-prediction = model.predict(features_scaled)
-
-# Step 7: Show result
 if st.button('Predict'):
+    features_scaled = scaler.transform(features)
+    prediction = model.predict(features_scaled)
+
     if prediction[0] == 1:
         st.error("⚠️ You may be at risk of heart disease.")
     else:
         st.success("✅ You are likely healthy.")
+st.markdown("---")
+st.markdown("👩‍💻 Created by **Mansi Pare** — Machine Learning Project on Heart Disease Prediction")
+
