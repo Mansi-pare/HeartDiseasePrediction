@@ -2,16 +2,28 @@ import streamlit as st
 import numpy as np
 import pickle
 import os
+import gdown  # <--- Added for Google Drive model download
 
 # -----------------------------
-# Step 1: Load model (from local file)
+# Step 1: Load model (from Google Drive or local)
 # -----------------------------
 @st.cache_resource
 def load_model():
     model_path = "heart_model.pkl"
+    file_id = "1145pyLGPoikAtEn6sK0kRN8TaOvolyYy"  # Google Drive file ID
+    url = f"https://drive.google.com/uc?id={file_id}"
+
+    # Download the model if it's not in the folder
     if not os.path.exists(model_path):
-        st.error("❌ Model file 'heart_model.pkl' not found in project folder.")
+        st.warning("📥 Downloading model from Google Drive...")
+        gdown.download(url, model_path, quiet=False, fuzzy=True)
+
+    # Check again if downloaded successfully
+    if not os.path.exists(model_path):
+        st.error("❌ Model file 'heart_model.pkl' not found or download failed.")
         st.stop()
+
+    # Load the model
     with open(model_path, "rb") as f:
         model = pickle.load(f)
     return model
