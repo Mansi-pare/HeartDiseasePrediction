@@ -1,10 +1,11 @@
-Heart Disease Prediction
+❤️ Heart Disease Prediction
 
 A machine learning project designed to predict the likelihood of heart disease using patient health indicators.
 
 📌 Project Overview
 
-This project uses a medical dataset containing health and lifestyle features to predict the risk of heart disease.
+This project uses a medical dataset containing various health and lifestyle features to predict the risk of heart disease.
+
 The workflow includes:
 
 Loading & cleaning the dataset
@@ -13,7 +14,7 @@ Exploratory Data Analysis (EDA)
 
 Feature engineering
 
-Splitting data into train/test
+Splitting data into train/test sets
 
 Training ML models
 
@@ -31,21 +32,11 @@ Data Preprocessing
 
 Exploratory Data Analysis
 
-Machine Learning Models (Logistic Regression / RandomForest / etc.)
+Machine Learning Models (Logistic Regression, Random Forest, etc.)
 
 Model Evaluation
 
 Handling Imbalanced Data (if applicable)
-
-🚀 How to Run the Project
-
-Clone the repository
-
-Install required libraries
-
-Open the .ipynb notebook
-
-Run all cells in order
 
 📊 Tech Stack
 
@@ -59,21 +50,34 @@ Scikit-learn
 
 Matplotlib / Seaborn
 
-📎 Future Improvements
+📈 Results & Insights
+
+The model successfully identifies key patterns in medical indicators that correlate with heart disease risk.
+
+Important predictors include cholesterol levels, BMI, blood pressure, age, and lifestyle habits.
+
+Machine learning models were evaluated using accuracy, precision, recall, F1-score, and ROC-AUC.
+
+These insights can help support early detection and health risk assessments.
+
+🚀 How to Run the Project
+
+Clone the repository
+
+Install required libraries
+
+Open the .ipynb notebook
+
+Run all cells in order
+
+🔧 Future Improvements
 
 Hyperparameter tuning
 
 Model deployment
 
-Adding a web interface
+Adding a web interface (Flask/Streamlit)
 
-## Dataset
-This project uses sample car mileage data containing features such as Horsepower, Weight, and Displacement to predict the Miles Per Gallon (MPG) of a vehicle. The dataset includes multiple numeric variables and has been preprocessed to handle missing values and maintain consistency for model training.
+📄 License
 
-## Project Workflow
-## Models Used
-## Results
-## How to Run the Notebook
-## Future Improvements
-## License
-
+This project is open-source and available under the MIT License.
