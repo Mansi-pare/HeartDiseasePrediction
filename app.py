@@ -91,3 +91,8 @@ if st.button("🔍 Predict"):
 
     except Exception as e:
         st.error(f"Prediction failed: {e}")
+
+st.markdown("""
+---
+### ✨ Created by **Mansi Pare**
+""")
