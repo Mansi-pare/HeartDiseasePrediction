@@ -68,6 +68,8 @@ Model deployment
 Adding a web interface
 
 ## Dataset
+This project uses sample car mileage data containing features such as Horsepower, Weight, and Displacement to predict the Miles Per Gallon (MPG) of a vehicle. The dataset includes multiple numeric variables and has been preprocessed to handle missing values and maintain consistency for model training.
+
 ## Project Workflow
 ## Models Used
 ## Results
